@@ -2,7 +2,7 @@
 from mcp.server.fastmcp import FastMCP
 import os
 
-# Create an MCP server
+# MCP server creation
 mcp = FastMCP("basic_mcp")
 
 NOTES_FILE = os.path.join(os.path.dirname(__file__), "notes.txt")
@@ -11,7 +11,7 @@ def ensure_file():
         with open(NOTES_FILE, "w") as f:
             f.write("")
 
-# Add an addition tool
+#tools
 @mcp.tool()
 def add_note(note : str) -> str:
     """
@@ -41,7 +41,7 @@ def get_notes() -> str:
         notes = f.read().strip()
     return notes or "No notes found."
 
-# Add a dynamic greeting resource
+#resources
 @mcp.resource("greeting://{name}")
 def get_greeting(name: str) -> str:
     """Get a personalized greeting"""
@@ -61,6 +61,7 @@ def get_latest_note() -> str:
         notes = f.readlines()
     return notes[-1].strip() if notes else "No notes found."
 
+#prompt
 @mcp.prompt()
 def note_summary_prompt() -> str:
     """
